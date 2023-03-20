@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_20_153858) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_20_161054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,7 +23,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_153858) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "medication_id"
+    t.bigint "user_id"
     t.index ["medication_id"], name: "index_animals_on_medication_id"
+    t.index ["user_id"], name: "index_animals_on_user_id"
   end
 
   create_table "appointments", force: :cascade do |t|
@@ -68,14 +70,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_153858) do
     t.boolean "owner", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "animal_id"
-    t.index ["animal_id"], name: "index_users_on_animal_id"
   end
 
   add_foreign_key "animals", "medications"
+  add_foreign_key "animals", "users"
   add_foreign_key "appointments", "animals"
   add_foreign_key "appointments", "slots"
   add_foreign_key "appointments", "users"
   add_foreign_key "medications", "users"
-  add_foreign_key "users", "animals"
 end
