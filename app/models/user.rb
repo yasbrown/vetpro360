@@ -1,9 +1,8 @@
 class User < ApplicationRecord
-  has_many :animals
-  has_many :medications
-  has_many :appointments
-  has_many :slots, through: :appointment
-  has_many :medications, through: :animal
+  has_many :animals, dependent: :destroy
+  has_many :medications, dependent: :destroy
+  has_many :appointments, dependent: :destroy
+  has_many :slots, through: :appointments
 
   validates :email, presence: true
   validates :password, presence: true

@@ -1,9 +1,9 @@
 class Animal < ApplicationRecord
   belongs_to :user
 
-  has_many :medications
-  has_many :appointments
-  has_many :slots, through: :appointment
+  has_many :medications, dependent: :destroy
+  has_many :appointments, dependent: :destroy
+  has_many :slots, through: :appointments
 
   validates :name, presence: true
   validates :species, presence: true

@@ -2,8 +2,6 @@ class Medication < ApplicationRecord
   belongs_to :animal
   belongs_to :user
 
-  has_many :users, through: :animal
-
   validates :quantity_dispensed, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true

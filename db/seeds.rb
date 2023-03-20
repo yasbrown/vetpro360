@@ -5,3 +5,45 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+
+# *-- BUILDING INSTANCES --*
+
+puts "Deleting all Users"
+User.destroy_all
+puts "Deleting all Animals"
+Animal.destroy_all
+puts "Deleting all Slots"
+Slot.destroy_all
+puts "DB clean"
+
+puts "Building new users"
+
+user = User.create!(
+  name: "Test Test",
+  email: "test@test.com",
+  password: "password"
+)
+puts "User with id: #{user.id} has been created"
+
+pet1 = Animal.create!(
+  name: "Fido",
+  species: "Dog",
+  gender: "Male Neutered",
+  user: user
+)
+puts "Animal with id: #{pet1.id} has been created"
+
+boolean_array = [true, false]
+36.times do
+  slot = Slot.create!(
+  date: Date.new(2023, 3, 20),
+  available: boolean_array.sample,
+  start_time: Time.new(2023, 3, 20, 9),
+  end_time: Time.new(2023, 3, 20, 18)
+  )
+  puts "Slot with id: #{slot.id} has been created"
+end
+
+
+puts "Finished!"
