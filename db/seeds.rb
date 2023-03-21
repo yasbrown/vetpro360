@@ -22,7 +22,9 @@ puts "Building new users"
 user = User.create!(
   name: "Test Test",
   email: "test@test.com",
-  password: "password"
+  password: "password",
+  address: "4 Hoyte Drive, London",
+  owner: true
 )
 puts "User with id: #{user.id} has been created"
 

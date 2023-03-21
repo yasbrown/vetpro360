@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   resources :slots, only: %i[index]
 
-  resources :users, only: %i[index, show, new, create, destroy] do
+  resources :users do
     resources :animals
   end
+
+  # resources :animals, only: %i[destroy]
 end

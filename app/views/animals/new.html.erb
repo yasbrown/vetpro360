@@ -1,0 +1,8 @@
+<h1>Add New Animal</h1>
+
+<%= simple_form_for [@user, @animal] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :species %>
+  <%= f.input :gender %>
+  <%= f.submit "Save animal", class: "btn btn-primary" %>
+<% end %>
