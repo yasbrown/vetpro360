@@ -12,6 +12,26 @@ class AnimalsController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def destroy
+    animal = Animal.find(params[:id])
+    animal.destroy
+    redirect_to user_path(animal.user), status: :see_other
+  end
+
+  def archive_animal
+    animal = Animal.find(params[:animal_id])
+    animal.archived = true
+    animal.save
+    redirect_to user_path(animal.user), status: :see_other
+  end
+
+  def unarchive_animal
+    animal = Animal.find(params[:animal_id])
+    animal.archived = false
+    animal.save
+    redirect_to user_path(animal.user), status: :see_other
+  end
+
   private
 
   def set_user

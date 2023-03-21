@@ -14,13 +14,26 @@
       <%= animal.name %>
       <%= animal.species %>
       <%= animal.gender %>
+      <%= link_to "Archive animal", animal_archive_path(animal), data: {turbo_confirm: "Are you sure?"} %>
     </li>
   <% end %>
 </ul>
 
+<h2>Archived Animals:</h2>
+<ul>
+  <% @archived_animals.each do |animal| %>
+      <li>
+        <%= animal.name %>
+        <%= animal.species %>
+        <%= animal.gender %>
+        <%= link_to "Unarchive animal", animal_unarchive_path(animal), data: {turbo_confirm: "Are you sure?"} %>
+      </li>
+    <% end %>
+</ul>
+
 <hr>
 
-<h2>Add new animal</h2>
+<%= link_to "Add new animal", new_user_animal_path(@user) %>
 
 <hr>
 

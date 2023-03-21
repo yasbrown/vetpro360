@@ -36,6 +36,15 @@ pet1 = Animal.create!(
 )
 puts "Animal with id: #{pet1.id} has been created"
 
+pet2 = Animal.create!(
+  name: "Luna",
+  species: "Dog",
+  gender: "Female Neutered",
+  user: user,
+  archived: true
+)
+puts "Animal with id: #{pet2.id} has been created"
+
 boolean_array = [true, false]
 36.times do
   slot = Slot.create!(
