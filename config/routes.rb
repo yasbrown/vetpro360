@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   resources :slots, only: [:index]
 
   resources :users do
-    resources :animals, only: [:new, :create, :edit, :update]
+    resources :animals, only: [:new, :create]
   end
 
-  resources :animals, only: [:destroy] do
+  resources :animals, only: [:destroy, :edit, :update, :show] do
     get "archive_animal", to: "animals#archive_animal", as: :archive
     get "unarchive_animal", to: "animals#unarchive_animal", as: :unarchive
   end

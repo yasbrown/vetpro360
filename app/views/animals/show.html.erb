@@ -1,0 +1,17 @@
+<h1><%= @animal.name %></h1>
+
+<p>Species: <%= @animal.species %></p>
+<p>Gender: <%= @animal.gender %></p>
+<p>Weight: <%= @animal.weight %></p>
+
+<hr>
+
+<p>Change details for <%= @animal.name %> <%= link_to "here", edit_animal_path(@animal) %></p>
+
+<hr>
+
+<%= link_to "Back to user profile", user_path(@user) %>
+
+<hr>
+
+<%= link_to "Delete #{@animal.name}", animal_path(@animal), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>

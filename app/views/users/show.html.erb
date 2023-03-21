@@ -11,7 +11,7 @@
 <ul>
   <% @animals.each do |animal| %>
     <li>
-      <%= animal.name %>
+      <%= link_to animal.name, animal_path(animal) %>
       <%= animal.species %>
       <%= animal.gender %>
       <%= link_to "Archive animal", animal_archive_path(animal), data: {turbo_confirm: "Are you sure?"} %>
@@ -23,7 +23,7 @@
 <ul>
   <% @archived_animals.each do |animal| %>
       <li>
-        <%= animal.name %>
+        <%= link_to animal.name, animal_path(animal) %>
         <%= animal.species %>
         <%= animal.gender %>
         <%= link_to "Unarchive animal", animal_unarchive_path(animal), data: {turbo_confirm: "Are you sure?"} %>
