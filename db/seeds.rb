@@ -22,7 +22,9 @@ puts "Building new users"
 user = User.create!(
   name: "Test Test",
   email: "test@test.com",
-  password: "password"
+  password: "password",
+  address: "4 Hoyte Drive, London",
+  owner: true
 )
 puts "User with id: #{user.id} has been created"
 
@@ -33,6 +35,15 @@ pet1 = Animal.create!(
   user: user
 )
 puts "Animal with id: #{pet1.id} has been created"
+
+pet2 = Animal.create!(
+  name: "Luna",
+  species: "Dog",
+  gender: "Female Neutered",
+  user: user,
+  archived: true
+)
+puts "Animal with id: #{pet2.id} has been created"
 
 boolean_array = [true, false]
 36.times do

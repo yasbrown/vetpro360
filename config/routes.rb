@@ -5,9 +5,14 @@ Rails.application.routes.draw do
   # root "articles#index"
   root to: "slots#index"
 
-  resources :slots, only: %i[index]
+  resources :slots, only: [:index]
 
-  resources :users, only: %i[index, show, new, create, destroy] do
-    resources :animals
+  resources :users do
+    resources :animals, only: [:new, :create]
+  end
+
+  resources :animals, only: [:destroy, :edit, :update, :show] do
+    get "archive_animal", to: "animals#archive_animal", as: :archive
+    get "unarchive_animal", to: "animals#unarchive_animal", as: :unarchive
   end
 end

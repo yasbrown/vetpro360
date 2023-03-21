@@ -1,0 +1,40 @@
+<h1><%= @user.name %></h1>
+
+<p>Email: <%= @user.email %></p>
+<p>Email: <%= @user.address %></p>
+
+<br>
+<br>
+<hr>
+
+<h2>Animals:</h2>
+<ul>
+  <% @animals.each do |animal| %>
+    <li>
+      <%= link_to animal.name, animal_path(animal) %>
+      <%= animal.species %>
+      <%= animal.gender %>
+      <%= link_to "Archive animal", animal_archive_path(animal), data: {turbo_confirm: "Are you sure?"} %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Archived Animals:</h2>
+<ul>
+  <% @archived_animals.each do |animal| %>
+      <li>
+        <%= link_to animal.name, animal_path(animal) %>
+        <%= animal.species %>
+        <%= animal.gender %>
+        <%= link_to "Unarchive animal", animal_unarchive_path(animal), data: {turbo_confirm: "Are you sure?"} %>
+      </li>
+    <% end %>
+</ul>
+
+<hr>
+
+<%= link_to "Add new animal", new_user_animal_path(@user) %>
+
+<hr>
+
+<%= link_to "Back to all users", users_path %>
