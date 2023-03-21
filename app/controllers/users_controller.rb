@@ -7,6 +7,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    @animal = Animal.find_by(user: @user.id)
+    @animals = Animal.where(user: @user.id)
   end
 end
