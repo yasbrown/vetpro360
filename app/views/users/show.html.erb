@@ -1,40 +1,54 @@
-<h1 id="hello"><%= @user.name %></h1>
+<div class="container mx-auto">
+  <div class="user-info py-6">
+    <h1><%= @user.first_name %> <%= @user.last_name %></h1>
 
-<p>Email: <%= @user.email %></p>
-<p>Email: <%= @user.address %></p>
+    <p>Email: <%= @user.email %></p>
+    <p>Email: <%= @user.address %></p>
+  </div>
 
-<br>
-<br>
-<hr>
+  <hr>
 
-<h2>Animals:</h2>
-<ul>
-  <% @animals.each do |animal| %>
-    <li>
-      <%= link_to animal.name, animal_path(animal) %>
-      <%= animal.species %>
-      <%= animal.gender %>
-      <%= link_to "Archive animal", animal_archive_path(animal), data: {turbo_confirm: "Are you sure?"} %>
-    </li>
-  <% end %>
-</ul>
+  <div class="all-animals-container">
+    <h2>Animals:</h2>
 
-<h2>Archived Animals:</h2>
-<ul>
-  <% @archived_animals.each do |animal| %>
-      <li>
-        <%= link_to animal.name, animal_path(animal) %>
-        <%= animal.species %>
-        <%= animal.gender %>
-        <%= link_to "Unarchive animal", animal_unarchive_path(animal), data: {turbo_confirm: "Are you sure?"} %>
-      </li>
-    <% end %>
-</ul>
+    <div class="unarchived-animals-container flex justify-center text-center">
+      <% @animals.each do |animal| %>
+        <div class="animal-card">
+          <div class="animal-info">
+            <h3><%= link_to animal.name, animal_path(animal) %></h3>
+            <p>Species: <%= animal.species %></p>
+            <p>Breed: <%= animal.breed %></p>
+            <p>Gender: <%= animal.gender %></p>
+          </div>
+          <%= link_to "Archive animal", animal_archive_path(animal) %>
+        </div>
+      <% end %>
+    </div>
 
-<hr>
+    <h2>Archived Animals:</h2>
+    <div class="archived-animals-container flex justify-center text-center">
+      <% @archived_animals.each do |animal| %>
+        <div class="animal-card">
+          <div class="animal-info">
+            <h3><%= link_to animal.name, animal_path(animal) %></h3>
+            <p>Species: <%= animal.species %></p>
+            <p>Breed: <%= animal.breed %></p>
+            <p>Gender: <%= animal.gender %></p>
+          </div>
+          <%= link_to "Unarchive animal", animal_unarchive_path(animal) %>
+        </div>
+      <% end %>
+    </div>
 
-<%= link_to "Add new animal", new_user_animal_path(@user) %>
+  </div>
 
-<hr>
 
-<%= link_to "Back to all users", users_path %>
+
+  <hr>
+
+  <%= link_to "Add new animal", new_user_animal_path(@user) %>
+
+  <hr>
+
+  <%= link_to "Back to all users", users_path %>
+</div>

@@ -20,7 +20,8 @@ puts "DB clean"
 puts "Building new users"
 
 user = User.create!(
-  name: "Test Test",
+  first_name: "Jane",
+  last_name: "Doe",
   email: "test@test.com",
   password: "password",
   address: "4 Hoyte Drive, London",
@@ -48,10 +49,10 @@ puts "Animal with id: #{pet2.id} has been created"
 boolean_array = [true, false]
 36.times do
   slot = Slot.create!(
-  date: Date.new(2023, 3, 20),
-  available: boolean_array.sample,
-  start_time: Time.new(2023, 3, 20, 9),
-  end_time: Time.new(2023, 3, 20, 18)
+    date: Date.new(2023, 3, 20),
+    available: boolean_array.sample,
+    start_time: Time.new(2023, 3, 20, 9),
+    end_time: Time.new(2023, 3, 20, 18)
   )
   puts "Slot with id: #{slot.id} has been created"
 end
