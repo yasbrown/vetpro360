@@ -49,6 +49,7 @@ puts "Animal with id: #{pet2.id} has been created"
 boolean_array = [true, false]
 opening_time = Time.new(2023, 3, 20, 9)
 closing_time = Time.new(2023, 3, 20, 18)
+ailment = ["Sore leg", "Skin", "Ears", "Diarrhoea", "Not right", "Vaccines"]
 (closing_time.hour - opening_time.hour).times do |hour|
   slot = Slot.create!(
     date: Date.new(2023, 3, 20),
@@ -64,7 +65,8 @@ closing_time = Time.new(2023, 3, 20, 18)
       user: user,
       slot: slot,
       start_time: slot.start_time,
-      end_time: slot.end_time
+      end_time: slot.end_time,
+      reason_for_appointment: ailment.sample
     )
     puts "Appointment with id: #{appointment.id} has been created"
   end

@@ -2,7 +2,7 @@ class AppointmentsController < ApplicationController
   def index
     @all_slots = Slot.all
     @available_slots = Slot.where(available: true)
-    @booked_appointments = Slot.where(available: false)
+    @booked_appointments = Appointment.all
   end
 
   def show

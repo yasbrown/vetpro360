@@ -14,12 +14,18 @@
 <hr>
 
 <h1>Booked appointments</h1>
-<% @booked_appointments.each do |slot| %>
-  <div class="flex">
-    <p>start time: <%= slot.start_time.strftime("%H:%M:%S") %></p>
-    <p>end time:<%= slot.end_time.strftime("%H:%M:%S") %></p>
-  </div>
-<% end %>
+<ol>
+  <% @booked_appointments.each do |appointment| %>
+    <li>
+      <p>Animal:<%= appointment.animal.name %></p>
+      <p>Start time: <%= appointment.start_time.strftime("%H:%M:%S") %></p>
+      <p>End time: <%= appointment.end_time.strftime("%H:%M:%S") %></p>
+      <p>Reason for appointment: <%= appointment.reason_for_appointment %></p>
+      <p><%= link_to "See details", appointment_path(appointment) %></p>
+    </li>
+  <% end %>
+</ol>
+
 <hr>
 
 <div class="container text-center">
