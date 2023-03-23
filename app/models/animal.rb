@@ -35,4 +35,7 @@ class Animal < ApplicationRecord
   DOG_BREEDS = dog_breed_list
   CAT_BREEDS = cat_breed_list
 
+  def is_neutered?
+    gender.include?"neutered"
+  end
 end
