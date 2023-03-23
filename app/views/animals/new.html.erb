@@ -2,7 +2,12 @@
 
 <%= simple_form_for [@user, @animal] do |f| %>
   <%= f.input :name, label: "Animal name", placeholder: "Max" %>
-  <%= f.input :species, label: "Species", placeholder: "Dog/cat" %>
-  <%= f.input :gender, label: "Gender", placeholder: "Male/female" %>
+  <%= f.input :species, collection: Animal::SPECIES, prompt: "Dog/cat" %>
+  <% if f.input.value == "Dog" %>
+    <%= f.input :breed, collection: Animal::DOG_BREEDS %>
+  <% elseif f.input.value == "Cat" %>
+    <%= f.input :breed, collection: Animal::CAT_BREEDS %>
+  <% end %>
+  <%= f.input :gender, collection: Animal::GENDER, label: "Gender", prompt: "Male/female" %>
   <%= f.submit "Save animal", class: "btn btn-primary" %>
 <% end %>

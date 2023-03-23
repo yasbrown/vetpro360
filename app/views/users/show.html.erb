@@ -1,4 +1,4 @@
-<div class="container mx-auto">
+<div class="container mx-auto pt-4">
   <div class="user-info py-6">
     <h1><%= @user.first_name %> <%= @user.last_name %></h1>
 
@@ -14,7 +14,7 @@
     <div class="unarchived-animals-container flex justify-center text-center">
       <% @animals.each do |animal| %>
         <div class="animal-card">
-          <div class="animal-info">
+          <div class="card-animal-info">
             <h3><%= link_to animal.name, animal_path(animal) %></h3>
             <p>Species: <%= animal.species %></p>
             <p>Breed: <%= animal.breed %></p>
@@ -25,11 +25,11 @@
       <% end %>
     </div>
 
-    <h2>Archived Animals:</h2>
-    <div class="archived-animals-container flex justify-center text-center">
+    <h2>Archived Animals</h2>
+    <div class="archived-animals-container flex justify-center text-center" >
       <% @archived_animals.each do |animal| %>
         <div class="animal-card">
-          <div class="animal-info">
+          <div class="card-animal-info">
             <h3><%= link_to animal.name, animal_path(animal) %></h3>
             <p>Species: <%= animal.species %></p>
             <p>Breed: <%= animal.breed %></p>
@@ -39,10 +39,7 @@
         </div>
       <% end %>
     </div>
-
   </div>
-
-
 
   <hr>
 
