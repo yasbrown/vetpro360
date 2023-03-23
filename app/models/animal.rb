@@ -13,8 +13,8 @@ class Animal < ApplicationRecord
   validates :gender, presence: true
   validates :weight, numericality: { only_integer: true }
 
-  SPECIES = [['Dog'], ['Cat']]
-  GENDER = [['Male'], ['Female'], ['Male neutered'], ['Female neutered']]
+  SPECIES = ["Dog", "Cat"]
+  GENDER = ["Male", "Female", "Male neutered", "Female neutered"]
 
   dog_breed_list = []
   dog_url = "https://api.thedogapi.com/v1/breeds"
