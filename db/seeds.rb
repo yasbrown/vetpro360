@@ -47,14 +47,27 @@ pet2 = Animal.create!(
 puts "Animal with id: #{pet2.id} has been created"
 
 boolean_array = [true, false]
-36.times do
+opening_time = Time.new(2023, 3, 20, 9)
+closing_time = Time.new(2023, 3, 20, 18)
+(closing_time.hour - opening_time.hour).times do |hour|
   slot = Slot.create!(
     date: Date.new(2023, 3, 20),
     available: boolean_array.sample,
-    start_time: Time.new(2023, 3, 20, 9),
-    end_time: Time.new(2023, 3, 20, 18)
+    start_time: opening_time + hour,
+    end_time: opening_time + hour + 1
   )
   puts "Slot with id: #{slot.id} has been created"
+
+  if slot.available == false
+    appointment = Appointment.create!(
+      animal: pet1,
+      user: user,
+      slot: slot,
+      start_time: slot.start_time,
+      end_time: slot.end_time
+    )
+    puts "Appointment with id: #{appointment.id} has been created"
+  end
 end
 
 

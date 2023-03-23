@@ -1,0 +1,10 @@
+<div class="card">
+  <% @animals.each do |animal| %>
+    <div class="info">
+      <%= link_to animal.name, animal_path(animal) %>
+      <%= animal.species %>
+      <%= animal.gender %>
+      <%= link_to "Archive animal", animal_archive_path(animal), data: {turbo_confirm: "Are you sure?"} %>
+    </div>
+  <% end %>
+</div>

@@ -1,8 +1,26 @@
+<%= link_to "See all users", users_path %>
+
+<hr>
+
 <h1>Appointments available today</h1>
 
-<% @slots.each do |slot| %>
-<%= slot.available == true %>
+<% @available_slots.each do |slot| %>
+  <div class="flex">
+    <p>start time: <%= slot.start_time.strftime("%H:%M:%S") %></p>
+    <p>end time:<%= slot.end_time.strftime("%H:%M:%S") %></p>
+  </div>
 <% end %>
+
+<hr>
+
+<h1>Booked appointments</h1>
+<% @booked_appointments.each do |slot| %>
+  <div class="flex">
+    <p>start time: <%= slot.start_time.strftime("%H:%M:%S") %></p>
+    <p>end time:<%= slot.end_time.strftime("%H:%M:%S") %></p>
+  </div>
+<% end %>
+<hr>
 
 <div class="container text-center">
   <div class="row row-cols-5">
