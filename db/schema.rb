@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_23_164247) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_24_142443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,9 +36,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_164247) do
     t.bigint "user_id"
     t.bigint "slot_id"
     t.text "reason_for_appointment"
+    t.bigint "vet_id"
     t.index ["animal_id"], name: "index_appointments_on_animal_id"
     t.index ["slot_id"], name: "index_appointments_on_slot_id"
     t.index ["user_id"], name: "index_appointments_on_user_id"
+    t.index ["vet_id"], name: "index_appointments_on_vet_id"
   end
 
   create_table "medications", force: :cascade do |t|
@@ -49,10 +51,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_164247) do
     t.integer "quantity_dispensed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.bigint "animal_id"
+    t.bigint "vet_id"
     t.index ["animal_id"], name: "index_medications_on_animal_id"
-    t.index ["user_id"], name: "index_medications_on_user_id"
+    t.index ["vet_id"], name: "index_medications_on_vet_id"
   end
 
   create_table "slots", force: :cascade do |t|
@@ -69,7 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_164247) do
     t.string "last_name"
     t.text "address"
     t.string "phone_number"
-    t.boolean "owner", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
@@ -81,10 +82,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_164247) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vets", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "animals", "users"
   add_foreign_key "appointments", "animals"
   add_foreign_key "appointments", "slots"
   add_foreign_key "appointments", "users"
+  add_foreign_key "appointments", "vets"
   add_foreign_key "medications", "animals"
-  add_foreign_key "medications", "users"
+  add_foreign_key "medications", "vets"
 end

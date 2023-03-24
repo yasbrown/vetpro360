@@ -34,6 +34,7 @@ class AnimalsController < ApplicationController
 
   def show
     @user = @animal.user
+    @appointments = Appointment.where(animal_id: Animal.find(params[:id]))
   end
 
   def edit

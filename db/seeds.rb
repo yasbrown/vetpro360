@@ -24,8 +24,7 @@ user = User.create!(
   last_name: "Doe",
   email: "test@test.com",
   password: "password",
-  address: "4 Hoyte Drive, London",
-  owner: true
+  address: "4 Hoyte Drive, London"
 )
 puts "User with id: #{user.id} has been created"
 

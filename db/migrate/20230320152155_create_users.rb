@@ -5,7 +5,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :last_name
       t.text :address
       t.string :phone_number
-      t.boolean :owner, default: false
 
       t.timestamps
     end
