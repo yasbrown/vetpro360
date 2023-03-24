@@ -1,19 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
-
-# *-- BUILDING INSTANCES --*
+require 'ice_cube'
 
 puts "Deleting all Users"
 User.destroy_all
+puts "Deleting all Vets"
+Vet.destroy_all
 puts "Deleting all Animals"
 Animal.destroy_all
 puts "Deleting all Slots"
+Appointment.destroy_all
+puts "Deleting all Appointments"
 Slot.destroy_all
 puts "DB clean"
 
@@ -24,8 +19,7 @@ user = User.create!(
   last_name: "Doe",
   email: "test@test.com",
   password: "password",
-  address: "4 Hoyte Drive, London",
-  owner: true
+  address: "4 Hoyte Drive, London"
 )
 puts "User with id: #{user.id} has been created"
 
@@ -46,31 +40,45 @@ pet2 = Animal.create!(
 )
 puts "Animal with id: #{pet2.id} has been created"
 
+vet = Vet.create!(
+  name: "Will"
+)
+puts "Vet with id: #{vet.id} has been created"
+
+nurse = Vet.create!(
+  name: "Nurse"
+)
+puts "Vet with id: #{nurse.id} has been created"
+
+
 boolean_array = [true, false]
-opening_time = Time.new(2023, 3, 20, 9)
-closing_time = Time.new(2023, 3, 20, 18)
+counter = 0
 ailment = ["Sore leg", "Skin", "Ears", "Diarrhoea", "Not right", "Vaccines"]
-(closing_time.hour - opening_time.hour).times do |hour|
+
+schedule = IceCube::Schedule.new(Time.local(2023, 3, 24, 9)) do |s|
+  s.add_recurrence_rule(IceCube::Rule.minutely(15).count(37))
+end
+
+schedule.all_occurrences[0..-2].each do |starting_time_slots|
   slot = Slot.create!(
-    date: Date.new(2023, 3, 20),
+    date: Date.new(2023, 3, 24),
     available: boolean_array.sample,
-    start_time: opening_time + hour,
-    end_time: opening_time + hour + 1
+    start_time: starting_time_slots,
+    end_time: schedule.all_occurrences[counter += 1]
   )
   puts "Slot with id: #{slot.id} has been created"
 
   if slot.available == false
     appointment = Appointment.create!(
       animal: pet1,
-      user: user,
       slot: slot,
       start_time: slot.start_time,
       end_time: slot.end_time,
-      reason_for_appointment: ailment.sample
+      reason_for_appointment: ailment.sample,
+      vet: vet
     )
     puts "Appointment with id: #{appointment.id} has been created"
   end
 end
-
 
 puts "Finished!"

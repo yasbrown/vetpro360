@@ -7,6 +7,7 @@ class Animal < ApplicationRecord
   has_many :medications, dependent: :destroy
   has_many :appointments, dependent: :destroy
   has_many :slots, through: :appointments
+  has_many :vets, through: :medications
 
   validates :name, presence: true
   validates :species, presence: true

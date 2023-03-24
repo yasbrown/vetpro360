@@ -5,9 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :animals, dependent: :destroy
-  has_many :medications, dependent: :destroy
-  has_many :appointments, dependent: :destroy
-  has_many :slots, through: :appointments
+  has_many :medications, through: :animals, dependent: :destroy
+  has_many :appointments, through: :animals, dependent: :destroy
 
   validates :email, presence: true
   validates :password, presence: true

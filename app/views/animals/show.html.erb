@@ -1,6 +1,9 @@
 <div class="container mx-auto pt-4">
   <div class="animal-info">
-    <h1><%= @animal.name %></h1>
+    <div class="animal-info-header flex justify-between items-center">
+      <h1><%= @animal.name %></h1>
+      <p>Change details for <%= @animal.name %> <%= link_to "here", edit_animal_path(@animal) %></p>
+    </div>
 
     <p>Species: <%= @animal.species %></p>
     <p>Breed: <%= @animal.breed %></p>
@@ -22,7 +25,15 @@
 
   <hr>
 
-  <p>Change details for <%= @animal.name %> <%= link_to "here", edit_animal_path(@animal) %></p>
+  <h3>Appointments</h3>
+  <% @appointments.each do |appointment| %>
+    <div class="appointment-card border my-4">
+      <p><%= appointment.start_time.strftime("%A %-d %B %Y") %></p>
+      <p>Time: <%= appointment.start_time.strftime("%H:%M:%S") %></p>
+      <p>With: Dr <%= appointment.vet.name %></p>
+      <p>Reason for appointment: <%= appointment.reason_for_appointment %></p>
+    </div>
+  <% end %>
 
   <hr>
 
