@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "appointments#index"
 
   resources :appointments, only: [:index, :show]
+  delete "appointments/:id", to: "appointments#destroy", as: :destroy_appointment
 
   resources :slots do
     resources :appointments, only: [:new, :create]

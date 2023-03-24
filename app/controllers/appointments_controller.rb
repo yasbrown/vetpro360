@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
   def index
-    @available_slots = Slot.where(available: true)
+    @available_slots = Slot.where(available: true).sort_by { |element| element.start_time }
     @booked_appointments = Appointment.all.sort_by { |element| element.start_time }
   end
 
@@ -33,6 +33,15 @@ class AppointmentsController < ApplicationController
 
     @appointment.save!
     redirect_to root_path
+  end
+
+  def destroy
+    @appointment = Appointment.find(params[:id])
+    slot = @appointment.slot
+    slot.available = true
+    slot.save
+    @appointment.destroy
+    redirect_to root_path, status: :see_other
   end
 
   private
