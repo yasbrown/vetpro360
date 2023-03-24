@@ -9,23 +9,25 @@
     <div class="flex">
       <p>start time: <%= slot.start_time.strftime("%H:%M:%S") %></p>
       <p>end time:<%= slot.end_time.strftime("%H:%M:%S") %></p>
+      <%= link_to "Book this appointment", new_slot_appointment_path(slot) %>
     </div>
   <% end %>
 
   <hr>
 
   <h1>Booked appointments</h1>
-  <ol>
-    <% @booked_appointments.each do |appointment| %>
-      <li>
-        <p>Animal:<%= appointment.animal.name %></p>
-        <p>Start time: <%= appointment.start_time.strftime("%H:%M:%S") %></p>
-        <p>End time: <%= appointment.end_time.strftime("%H:%M:%S") %></p>
-        <p>Reason for appointment: <%= appointment.reason_for_appointment %></p>
-        <p><%= link_to "See details", appointment_path(appointment) %></p>
-      </li>
-    <% end %>
-  </ol>
+
+  <% @booked_appointments.each do |appointment| %>
+    <div class="border my-2">
+      <p>Animal:<%= appointment.animal.name %></p>
+      <p>Vet: <%= appointment.vet.name %></p>
+      <p>Start time: <%= appointment.start_time.strftime("%H:%M:%S") %></p>
+      <p>End time: <%= appointment.end_time.strftime("%H:%M:%S") %></p>
+      <p>Reason for appointment: <%= appointment.reason_for_appointment %></p>
+      <p><%= link_to "See details", appointment_path(appointment) %></p>
+    </div>
+  <% end %>
+
 
   <hr>
 

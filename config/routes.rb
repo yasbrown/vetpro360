@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   resources :appointments, only: [:index, :show]
 
+  resources :slots do
+    resources :appointments, only: [:new, :create]
+  end
+
   resources :users do
     resources :animals, only: [:new, :create]
   end

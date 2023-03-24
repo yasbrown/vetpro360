@@ -30,6 +30,7 @@
     <div class="appointment-card border my-4">
       <p><%= appointment.start_time.strftime("%A %-d %B %Y") %></p>
       <p>Time: <%= appointment.start_time.strftime("%H:%M:%S") %></p>
+      <p>With: Dr <%= appointment.vet.name %></p>
       <p>Reason for appointment: <%= appointment.reason_for_appointment %></p>
     </div>
   <% end %>

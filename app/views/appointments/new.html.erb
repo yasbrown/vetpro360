@@ -1,0 +1,9 @@
+<h1>Book new appointment</h1>
+
+<%= simple_form_for [@slot, @appointment] do |f| %>
+  <%= f.input :start_time, label: "Start time" %>
+  <%= f.input :end_time, label: "End time" %>
+  <%= f.input :reason_for_appointment, label: "Reason for appointment", placeholder: "What is the main reason for the animal's visit?" %>
+  <%= f.association :vet, label: "vet" %>
+  <%= f.submit "Save appointment", class: "btn btn-primary" %>
+<% end %>
