@@ -21,14 +21,14 @@ class AnimalsController < ApplicationController
   def archive_animal
     animal = Animal.find(params[:animal_id])
     animal.archived = true
-    animal.save
+    animal.save!
     redirect_to user_path(animal.user), status: :see_other
   end
 
   def unarchive_animal
     animal = Animal.find(params[:animal_id])
     animal.archived = false
-    animal.save
+    animal.save!
     redirect_to user_path(animal.user), status: :see_other
   end
 

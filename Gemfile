@@ -8,6 +8,7 @@ gem 'sass-rails'
 gem 'devise'
 gem 'ice_cube'
 gem 'activesupport'
+gem 'rails-controller-testing'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.2"

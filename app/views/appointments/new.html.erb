@@ -1,8 +1,11 @@
-<h1>Book new appointment</h1>
+<div class="container">
+  <h1>Book new appointment</h1>
 
-<%= simple_form_for [@slot, @appointment] do |f| %>
-  <%= f.association :animal %>
-  <%= f.input :reason_for_appointment, label: "Reason for appointment", placeholder: "What is the main reason for the animal's visit?" %>
-  <%= f.association :vet, label: "vet" %>
-  <%= f.submit "Save appointment", class: "btn btn-primary" %>
-<% end %>
+  <%= simple_form_for [@slot, @appointment] do |f| %>
+    <%= f.association :animal, collection: User.all, label_method: :last_name, label: "Surname" %>
+    <%= f.association :animal, label: "Animal name " %>
+    <%= f.input :reason_for_appointment, label: "Reason for appointment", placeholder: "What is the main reason for the animal's visit?" %>
+    <%= f.association :vet, label: "Vet" %>
+    <%= f.submit "Save appointment", class: "btn btn-primary" %>
+  <% end %>
+</div>
