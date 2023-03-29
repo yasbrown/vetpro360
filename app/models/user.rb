@@ -8,8 +8,10 @@ class User < ApplicationRecord
   has_many :medications, through: :animals, dependent: :destroy
   has_many :appointments, through: :animals, dependent: :destroy
 
-  validates :email, presence: true
-  validates :password, presence: true, length: { minimum: 8 }
+  validates :email, presence: true,
+                    uniqueness: { message: "Email already exists"}
+  validates :password, presence: true,
+                        length: { minimum: 8 }
   validates :first_name, presence: true
   validates :last_name, presence: true
 end

@@ -4,11 +4,11 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :species %>
-  <%= f.select :species, SPECIES %>
+  <%= f.select :species, Animal::SPECIES %>
   <%= f.label :breed %>
   <%= f.select :breed, Animal::DOG_BREEDS %>
   <%= f.label :gender %>
-  <%= f.select :gender, GENDER %>
+  <%= f.select :gender, Animal::GENDER %>
   <%= f.submit %>
 <% end %>
 
