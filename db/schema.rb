@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_24_143643) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_03_113128) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_143643) do
     t.string "species"
     t.string "breed"
     t.string "gender"
-    t.integer "weight", default: 0
+    t.integer "current_weight", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -86,10 +86,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_143643) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "weights", force: :cascade do |t|
+    t.date "date_weight_updated"
+    t.integer "weight"
+    t.bigint "animal_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["animal_id"], name: "index_weights_on_animal_id"
+  end
+
   add_foreign_key "animals", "users"
   add_foreign_key "appointments", "animals"
   add_foreign_key "appointments", "slots"
   add_foreign_key "appointments", "vets"
   add_foreign_key "medications", "animals"
   add_foreign_key "medications", "vets"
+  add_foreign_key "weights", "animals"
 end
