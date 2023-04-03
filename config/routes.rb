@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   resources :animals, only: [:destroy, :edit, :update, :show] do
     get "archive_animal", to: "animals#archive_animal", as: :archive
     get "unarchive_animal", to: "animals#unarchive_animal", as: :unarchive
+    member do
+      resources :weights, only: [:create]
+    end
   end
 
 end

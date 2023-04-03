@@ -8,11 +8,12 @@ class Animal < ApplicationRecord
   has_many :appointments, dependent: :destroy
   has_many :slots, through: :appointments
   has_many :vets, through: :medications
+  has_many :weights
 
   validates :name, presence: true
   validates :species, presence: true
   validates :gender, presence: true
-  validates :weight, numericality: { only_integer: true }
+  validates :current_weight, numericality: { only_float: true }
 
   SPECIES = ["Dog", "Cat"]
   GENDER = ["Male", "Female", "Male neutered", "Female neutered"]

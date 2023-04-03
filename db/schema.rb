@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_113128) do
     t.string "species"
     t.string "breed"
     t.string "gender"
-    t.integer "current_weight", default: 0
+    t.float "current_weight", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -88,7 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_113128) do
 
   create_table "weights", force: :cascade do |t|
     t.date "date_weight_updated"
-    t.integer "weight"
+    t.float "weight", default: 0.0
     t.bigint "animal_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

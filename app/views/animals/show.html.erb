@@ -8,17 +8,18 @@
     <p>Species: <%= @animal.species %></p>
     <p>Breed: <%= @animal.breed %></p>
     <p>Gender: <%= @animal.gender %></p>
-    <div class="animal-weight-info flex">
-      <p>Weight: <%= @animal.weight %></p>
-      <div class="animal-weight-form flex">
+    <div class="animal-weight-info d-flex">
+      <p>Weight: <%= @animal.current_weight %>kg</p>
+      <div class="animal-weight-form d-flex">
         <div>
-          <%= simple_form_for @animal do |f| %>
-          <%= f.input :weight, label: '_' %>
+          <%= simple_form_for @new_weight do |f| %>
+          <%= f.input :weight, label: "Update weight" %>
+          <%= f.hidden_field :date_weight_updated, value: Date.today %>
         </div>
-        <div class="btn">
-          <%= f.submit 'Update weight' %>
+        <div>
+          <%= f.button :submit, "Update" %>
+          <% end %>
         </div>
-        <% end %>
       </div>
     </div>
   </div>
