@@ -22,8 +22,14 @@
         </div>
       </div>
     </div>
-    <%= line_chart Weight.where(animal_id: params[:id]).group_by_day(:created_at).maximum(:weight) %>
-
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      See weight chart
+    </a>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        <%= line_chart Weight.where(animal_id: params[:id]).group_by_day(:created_at).maximum(:weight) %>
+      </div>
+    </div>
 
   <hr>
 
