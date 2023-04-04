@@ -1,4 +1,4 @@
-<div class="container mx-auto pt-4">
+<div class="container">
   <div class="animal-info">
     <div class="animal-info-header flex justify-between items-center">
       <h1><%= @animal.name %></h1>
@@ -8,9 +8,9 @@
     <p>Species: <%= @animal.species %></p>
     <p>Breed: <%= @animal.breed %></p>
     <p>Gender: <%= @animal.gender %></p>
-    <div class="animal-weight-info d-flex">
+    <div class="animal-weight-info d-flex justify-content-between align-items-center">
       <p>Weight: <%= @animal.current_weight %>kg</p>
-      <div class="animal-weight-form d-flex">
+      <div class="animal-weight-form d-flex align-items-center">
         <div>
           <%= simple_form_for @new_weight do |f| %>
           <%= f.input :weight, label: "Update weight" %>
@@ -22,7 +22,8 @@
         </div>
       </div>
     </div>
-  </div>
+    <%= line_chart Weight.where(animal_id: params[:id]).group_by_day(:created_at).maximum(:weight) %>
+
 
   <hr>
 

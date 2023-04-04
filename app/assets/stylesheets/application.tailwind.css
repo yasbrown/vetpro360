@@ -4,7 +4,7 @@
 
 
 
-@layer components {
+/* @layer components {
   .animal-card {
     @apply border border-gray-300 rounded-lg;
     height: 20rem;
@@ -13,4 +13,4 @@
     margin-right: 5rem;
     padding-top: 2rem;
   }
-}
+} */

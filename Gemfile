@@ -9,6 +9,9 @@ gem 'devise'
 gem 'ice_cube'
 gem 'activesupport'
 gem 'rails-controller-testing'
+gem "chartkick"
+gem "groupdate"
+
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.2"
@@ -75,3 +78,5 @@ group :development do
 end
 
 gem "tailwindcss-rails", "~> 2.0"
+
+gem "importmap-rails", "~> 1.1"
