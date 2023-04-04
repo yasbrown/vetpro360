@@ -11,9 +11,9 @@
   <div class="all-animals-container">
     <h2>Animals:</h2>
 
-    <div class="unarchived-animals-container flex justify-center text-center">
+    <div class="unarchived-animals-container d-flex justify-content-center text-center">
       <% @animals.each do |animal| %>
-        <div class="animal-card">
+        <div class="animal-card border rounded m-2 p-4">
           <div class="card-animal-info">
             <h3><%= link_to animal.name, animal_path(animal) %></h3>
             <p>Species: <%= animal.species %></p>
@@ -26,9 +26,9 @@
     </div>
 
     <h2>Archived Animals</h2>
-    <div class="archived-animals-container flex justify-center text-center" >
+    <div class="archived-animals-container d-flex justify-content-center text-center" >
       <% @archived_animals.each do |animal| %>
-        <div class="animal-card">
+        <div class="animal-card border rounded m-2 p-4">
           <div class="card-animal-info">
             <h3><%= link_to animal.name, animal_path(animal) %></h3>
             <p>Species: <%= animal.species %></p>

@@ -35,6 +35,7 @@ class AnimalsController < ApplicationController
   def show
     @user = @animal.user
     @appointments = Appointment.where(animal_id: Animal.find(params[:id]))
+    @new_weight = Weight.new
   end
 
   def edit

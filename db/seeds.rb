@@ -40,6 +40,15 @@ pet2 = Animal.create!(
 )
 puts "Animal with id: #{pet2.id} has been created"
 
+pet3 = Animal.create!(
+  name: "Coco",
+  species: "Dog",
+  gender: "Female Neutered",
+  user: user,
+  current_weight: 15
+)
+puts "Animal with id: #{pet3.id} has been created"
+
 vet = Vet.create!(
   name: "Will"
 )
@@ -54,6 +63,7 @@ puts "Vet with id: #{nurse.id} has been created"
 boolean_array = [true, false]
 counter = 0
 ailment = ["Sore leg", "Skin", "Ears", "Diarrhoea", "Not right", "Vaccines"]
+pets = [pet1, pet2, pet3]
 
 schedule = IceCube::Schedule.new(Time.local(2023, 3, 24, 9)) do |s|
   s.add_recurrence_rule(IceCube::Rule.minutely(15).count(37))
@@ -70,7 +80,7 @@ schedule.all_occurrences[0..-2].each do |starting_time_slots|
 
   if slot.available == false
     appointment = Appointment.create!(
-      animal: pet1,
+      animal: pets.sample,
       slot: slot,
       start_time: slot.start_time,
       end_time: slot.end_time,

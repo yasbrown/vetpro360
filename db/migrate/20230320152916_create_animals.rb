@@ -5,7 +5,7 @@ class CreateAnimals < ActiveRecord::Migration[7.0]
       t.string :species
       t.string :breed
       t.string :gender
-      t.integer :weight, default: 0
+      t.float :weight, default: 0
 
       t.timestamps
     end
