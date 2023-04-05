@@ -1,43 +1,55 @@
-<div class="container mx-auto pt-4">
+<div class="container pt-5">
   <div class="user-info py-6">
-    <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+    <div class="d-flex justify-content-between align-items-center">
+      <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+      <%= link_to "Back to all users", users_path %>
+    </div>
 
     <p>Email: <%= @user.email %></p>
     <p>Address: <%= @user.address %></p>
+    <p>Phone number: <%= @user.phone_number %></p>
   </div>
 
   <hr>
 
   <div class="all-animals-container">
-    <h2>Animals:</h2>
+    <h2>Pets:</h2>
 
     <div class="unarchived-animals-container d-flex justify-content-center text-center">
       <% @animals.each do |animal| %>
         <div class="animal-card border rounded m-2 p-4">
           <div class="card-animal-info">
-            <h3><%= link_to animal.name, animal_path(animal) %></h3>
+            <%= link_to(animal) do %>
+            <h3><%= animal.name %></h3>
             <p>Species: <%= animal.species %></p>
             <p>Breed: <%= animal.breed %></p>
             <p>Gender: <%= animal.gender %></p>
+            <% end %>
           </div>
           <%= link_to "Archive animal", animal_archive_path(animal) %>
         </div>
       <% end %>
     </div>
 
-    <h2>Archived Animals</h2>
-    <div class="archived-animals-container d-flex justify-content-center text-center" >
-      <% @archived_animals.each do |animal| %>
-        <div class="animal-card border rounded m-2 p-4">
-          <div class="card-animal-info">
-            <h3><%= link_to animal.name, animal_path(animal) %></h3>
-            <p>Species: <%= animal.species %></p>
-            <p>Breed: <%= animal.breed %></p>
-            <p>Gender: <%= animal.gender %></p>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Archived Animals
+    </a>
+    <div class="collapse" id="collapseExample">
+      <div class="archived-animals-container d-flex justify-content-center text-center" >
+        <% @archived_animals.each do |animal| %>
+          <div class="animal-card border rounded m-2 p-4">
+            <div class="card-animal-info">
+              <%= link_to(animal) do %>
+              <h3><%= animal.name %></h3>
+              <p>Species: <%= animal.species %></p>
+              <p>Breed: <%= animal.breed %></p>
+              <p>Gender: <%= animal.gender %></p>
+              <% end %>
+            </div>
+            <%= link_to "Unarchive animal", animal_unarchive_path(animal) %>
           </div>
-          <%= link_to "Unarchive animal", animal_unarchive_path(animal) %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 
@@ -45,7 +57,4 @@
 
   <%= link_to "Add new animal", new_user_animal_path(@user) %>
 
-  <hr>
-
-  <%= link_to "Back to all users", users_path %>
 </div>

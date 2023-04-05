@@ -65,13 +65,13 @@ counter = 0
 ailment = ["Sore leg", "Skin", "Ears", "Diarrhoea", "Not right", "Vaccines"]
 pets = [pet1, pet2, pet3]
 
-schedule = IceCube::Schedule.new(Time.local(2023, 3, 24, 9)) do |s|
+schedule = IceCube::Schedule.new(Time.local(2023, 4, 5, 9)) do |s|
   s.add_recurrence_rule(IceCube::Rule.minutely(15).count(37))
 end
 
 schedule.all_occurrences[0..-2].each do |starting_time_slots|
   slot = Slot.create!(
-    date: Date.new(2023, 3, 24),
+    date: Date.new(2023, 4, 5),
     available: boolean_array.sample,
     start_time: starting_time_slots,
     end_time: schedule.all_occurrences[counter += 1]
