@@ -5,7 +5,7 @@
       <%= link_to "Back to all owners", owner_attributes_path %>
     </div>
 
-    <p>Email: <%= @owner.email %></p>
+    <p>Email: <%= @owner.user.email %></p>
     <p>Address: <%= @owner.address %></p>
     <p>Phone number: <%= @owner.phone_number %></p>
   </div>
@@ -55,6 +55,6 @@
 
   <hr>
 
-  <%= link_to "Add new animal", new_user_animal_path(@user) %>
+  <%= link_to "Add new animal", new_owner_attribute_animal_path(@owner) %>
 
 </div>

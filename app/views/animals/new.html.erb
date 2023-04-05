@@ -1,6 +1,6 @@
 <h1>Add New Animal</h1>
 
-<%= simple_form_for [@user, @animal] do |f| %>
+<%= simple_form_for [@owner, @animal] do |f| %>
   <%= f.input :name, label: "Animal name", placeholder: "Max" %>
   <%= f.input :species, collection: Animal::SPECIES %>
   <%= f.input :breed, collection: Animal::DOG_BREEDS %>

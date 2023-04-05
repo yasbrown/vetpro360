@@ -6,7 +6,7 @@ class OwnerAttributesController < ApplicationController
   def show
     @owner = OwnerAttribute.find(params[:id])
 
-    @animals = Animal.where(user: @user.id, archived: false)
-    @archived_animals = Animal.where(user: @user.id, archived: true)
+    @animals = Animal.where(owner_attribute: @owner.id, archived: false)
+    @archived_animals = Animal.where(owner_attribute: @owner.id, archived: true)
   end
 end

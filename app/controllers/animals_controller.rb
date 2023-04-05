@@ -1,5 +1,5 @@
 class AnimalsController < ApplicationController
-  before_action :set_user, only: [:new, :create]
+  before_action :set_owner, only: [:new, :create]
   before_action :set_animal, only: [:destroy, :show, :edit, :update]
 
   def new
@@ -8,32 +8,32 @@ class AnimalsController < ApplicationController
 
   def create
     @animal = Animal.new(animal_params)
-    @animal.user = @user
+    @animal.owner_attribute = @owner
     @animal.save!
-    redirect_to user_path(@user)
+    redirect_to owner_attribute_path(@owner)
   end
 
   def destroy
     @animal.destroy
-    redirect_to user_path(@animal.user), status: :see_other
+    redirect_to owner_attribute_path(@animal.owner_attribute), status: :see_other
   end
 
   def archive_animal
     animal = Animal.find(params[:animal_id])
     animal.archived = true
     animal.save!
-    redirect_to user_path(animal.user), status: :see_other
+    redirect_to owner_attribute_path(animal.owner_attribute), status: :see_other
   end
 
   def unarchive_animal
     animal = Animal.find(params[:animal_id])
     animal.archived = false
     animal.save!
-    redirect_to user_path(animal.user), status: :see_other
+    redirect_to owner_attribute_path(animal.owner_attribute), status: :see_other
   end
 
   def show
-    @user = @animal.user
+    @owner = @animal.owner_attribute
     @appointments = Appointment.where(animal_id: Animal.find(params[:id]))
     @new_weight = Weight.new
   end
@@ -49,8 +49,8 @@ class AnimalsController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.find(params[:user_id])
+  def set_owner
+    @owner = OwnerAttribute.find(params[:owner_attribute_id])
   end
 
   def set_animal
