@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_03_113128) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_154040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,14 +28,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_113128) do
   end
 
   create_table "appointments", force: :cascade do |t|
-    t.time "start_time"
-    t.time "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "animal_id"
     t.bigint "slot_id"
     t.text "reason_for_appointment"
     t.bigint "vet_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.index ["animal_id"], name: "index_appointments_on_animal_id"
     t.index ["slot_id"], name: "index_appointments_on_slot_id"
     t.index ["vet_id"], name: "index_appointments_on_vet_id"
@@ -57,11 +57,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_113128) do
 
   create_table "slots", force: :cascade do |t|
     t.date "date"
-    t.time "start_time"
-    t.time "end_time"
     t.boolean "available", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "users", force: :cascade do |t|
