@@ -13,12 +13,12 @@ class OwnerAttributesController < ApplicationController
   end
 
   def new
-    @user = User.new
     @owner = OwnerAttribute.new
   end
 
   def create
     @owner = OwnerAttribute.new(owner_params)
+    raise
     @owner.user = @user
     @owner.save!
     redirect_to owner_attribute_path(@owner)

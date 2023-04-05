@@ -7,4 +7,10 @@ class OwnerAttribute < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  after_validation :create_user
+
+  def create_user
+    User.create!
+  end
 end

@@ -3,7 +3,7 @@
 <%= simple_form_for [@owner] do |f| %>
   <%= f.input :first_name, label: "First name", placeholder: "John" %>
   <%= f.input :last_name, label: "Last name", placeholder: "Doe" %>
-  <%= f.input :address, label: "Address" %>
   <%= f.input :phone_number, label: "Contact number" %>
-  <%= f.submit "Save animal", class: "btn btn-primary" %>
+  <%= f.input :address, label: "Address" %>
+  <%= f.submit "Save", class: "btn btn-primary" %>
 <% end %>
