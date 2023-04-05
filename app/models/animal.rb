@@ -2,12 +2,13 @@ require "json"
 require "open-uri"
 
 class Animal < ApplicationRecord
-  belongs_to :user
+  belongs_to :owner_attribute
 
   has_many :medications, dependent: :destroy
   has_many :appointments, dependent: :destroy
   has_many :slots, through: :appointments
-  has_many :vets, through: :medications
+  has_many :vet_attributes, through: :medications
+  has_many :vet_attributes, through: :appointments
   has_many :weights
 
   validates :name, presence: true
@@ -15,29 +16,29 @@ class Animal < ApplicationRecord
   validates :gender, presence: true
   validates :current_weight, numericality: { only_float: true }
 
-  SPECIES = ["Dog", "Cat"]
-  GENDER = ["Male", "Female", "Male neutered", "Female neutered"]
+  # SPECIES = ["Dog", "Cat"]
+  # GENDER = ["Male", "Female", "Male neutered", "Female neutered"]
 
-  dog_breed_list = []
-  dog_url = "https://api.thedogapi.com/v1/breeds"
-  dog_breeds_array = JSON.parse(URI.open(dog_url).read)
+  # dog_breed_list = []
+  # dog_url = "https://api.thedogapi.com/v1/breeds"
+  # dog_breeds_array = JSON.parse(URI.open(dog_url).read)
 
-  dog_breeds_array.map do |dog_breed|
-    dog_breed_list << dog_breed["name"]
-  end
+  # dog_breeds_array.map do |dog_breed|
+  #   dog_breed_list << dog_breed["name"]
+  # end
 
-  cat_breed_list = []
-  cat_url = "https://api.thecatapi.com/v1/breeds"
-  cat_breeds_array = JSON.parse(URI.open(cat_url).read)
+  # cat_breed_list = []
+  # cat_url = "https://api.thecatapi.com/v1/breeds"
+  # cat_breeds_array = JSON.parse(URI.open(cat_url).read)
 
-  cat_breeds_array.map do |cat_breed|
-    cat_breed_list << cat_breed["name"]
-  end
+  # cat_breeds_array.map do |cat_breed|
+  #   cat_breed_list << cat_breed["name"]
+  # end
 
-  DOG_BREEDS = dog_breed_list
-  CAT_BREEDS = cat_breed_list
+  # DOG_BREEDS = dog_breed_list
+  # CAT_BREEDS = cat_breed_list
 
-  def is_neutered?
-    gender.include?"neutered"
-  end
+  # def is_neutered?
+  #   gender.include?"neutered"
+  # end
 end

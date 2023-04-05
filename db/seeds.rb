@@ -2,8 +2,10 @@ require 'ice_cube'
 
 puts "Deleting all Users"
 User.destroy_all
+puts "Deleting all Owners"
+OwnerAttribute.destroy_all
 puts "Deleting all Vets"
-Vet.destroy_all
+VetAttribute.destroy_all
 puts "Deleting all Animals"
 Animal.destroy_all
 puts "Deleting all Slots"
@@ -14,20 +16,33 @@ puts "DB clean"
 
 puts "Building new users"
 
-user = User.create!(
+user1 = User.create!(
+  email: "test1@test.com",
+  password: "password",
+  owner?: true
+)
+puts "User with id: #{user1.id} has been created"
+
+user2 = User.create!(
+  email: "test2@test.com",
+  password: "password",
+  owner?: true
+)
+puts "User with id: #{user2.id} has been created"
+
+owner = OwnerAttribute.create!(
   first_name: "Jane",
   last_name: "Doe",
-  email: "test@test.com",
-  password: "password",
-  address: "4 Hoyte Drive, London"
+  address: "4 Hoyte Drive, London",
+  user: user1
 )
-puts "User with id: #{user.id} has been created"
+puts "Owner with id: #{owner.id} has been created"
 
 pet1 = Animal.create!(
   name: "Fido",
   species: "Dog",
   gender: "Male Neutered",
-  user: user
+  owner_attribute: owner
 )
 puts "Animal with id: #{pet1.id} has been created"
 
@@ -35,7 +50,7 @@ pet2 = Animal.create!(
   name: "Luna",
   species: "Dog",
   gender: "Female Neutered",
-  user: user,
+  owner_attribute: owner,
   archived: true
 )
 puts "Animal with id: #{pet2.id} has been created"
@@ -44,20 +59,21 @@ pet3 = Animal.create!(
   name: "Coco",
   species: "Dog",
   gender: "Female Neutered",
-  user: user,
+  owner_attribute: owner,
   current_weight: 15
 )
 puts "Animal with id: #{pet3.id} has been created"
 
-vet = Vet.create!(
-  name: "Will"
+vet = VetAttribute.create!(
+  name: "Will",
+  user: user2
 )
 puts "Vet with id: #{vet.id} has been created"
 
-nurse = Vet.create!(
-  name: "Nurse"
-)
-puts "Vet with id: #{nurse.id} has been created"
+# nurse = Vet.create!(
+#   name: "Nurse"
+# )
+# puts "Vet with id: #{nurse.id} has been created"
 
 
 boolean_array = [true, false]
@@ -65,13 +81,13 @@ counter = 0
 ailment = ["Sore leg", "Skin", "Ears", "Diarrhoea", "Not right", "Vaccines"]
 pets = [pet1, pet2, pet3]
 
-schedule = IceCube::Schedule.new(Time.local(2023, 4, 5, 9)) do |s|
+schedule = IceCube::Schedule.new(Time.local(2023, 4, 6, 9)) do |s|
   s.add_recurrence_rule(IceCube::Rule.minutely(15).count(37))
 end
 
 schedule.all_occurrences[0..-2].each do |starting_time_slots|
   slot = Slot.create!(
-    date: Date.new(2023, 4, 5),
+    date: Date.new(2023, 4, 6),
     available: boolean_array.sample,
     start_time: starting_time_slots,
     end_time: schedule.all_occurrences[counter += 1]
@@ -85,7 +101,7 @@ schedule.all_occurrences[0..-2].each do |starting_time_slots|
       start_time: slot.start_time,
       end_time: slot.end_time,
       reason_for_appointment: ailment.sample,
-      vet: vet
+      vet_attribute: vet
     )
     puts "Appointment with id: #{appointment.id} has been created"
   end

@@ -1,0 +1,2 @@
+module OwnerAttributesHelper
+end

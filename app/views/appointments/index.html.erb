@@ -1,4 +1,4 @@
-<%= link_to "See all users", users_path %>
+<%= link_to "See all owners", owner_attributes_path %>
 
 <hr>
 
@@ -20,7 +20,7 @@
   <% @booked_appointments.each do |appointment| %>
     <div class="border my-2">
       <p>Animal:<%= appointment.animal.name %></p>
-      <p>Vet: <%= appointment.vet.name %></p>
+      <p>Vet: <%= appointment.vet_attributes.name %></p>
       <p>Start time: <%= appointment.start_time.strftime("%H:%M:%S") %></p>
       <p>End time: <%= appointment.end_time.strftime("%H:%M:%S") %></p>
       <p>Reason for appointment: <%= appointment.reason_for_appointment %></p>
