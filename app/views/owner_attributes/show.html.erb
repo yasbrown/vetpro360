@@ -55,6 +55,7 @@
 
   <hr>
 
-  <%= link_to "Add new animal", new_owner_attribute_animal_path(@owner) %>
+  <p><%= link_to "Add new animal", new_owner_attribute_animal_path(@owner) %></p>
+  <p><%= link_to "Update #{@owner.first_name} #{@owner.last_name}'s details", edit_owner_attribute_path(@owner) %></p>
 
 </div>

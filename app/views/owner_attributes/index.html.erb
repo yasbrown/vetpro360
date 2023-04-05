@@ -10,4 +10,9 @@
       <li><%= link_to "#{owner.first_name} #{owner.last_name}", owner_attribute_path(owner) %></li>
     <% end %>
   </ul>
+
+  <hr>
+
+  <p><%= link_to "Create a new owner profile", new_owner_attribute_path %></p>
+
 </div>
