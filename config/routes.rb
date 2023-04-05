@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :appointments, only: [:new, :create]
   end
 
-  resources :users do
+  resources :owner_attributes do
     resources :animals, only: [:new, :create]
   end
 

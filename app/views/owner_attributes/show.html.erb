@@ -1,13 +1,13 @@
 <div class="container pt-5">
   <div class="user-info py-6">
     <div class="d-flex justify-content-between align-items-center">
-      <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-      <%= link_to "Back to all users", users_path %>
+      <h1><%= @owner.first_name %> <%= @owner.last_name %></h1>
+      <%= link_to "Back to all owners", owner_attributes_path %>
     </div>
 
-    <p>Email: <%= @user.email %></p>
-    <p>Address: <%= @user.address %></p>
-    <p>Phone number: <%= @user.phone_number %></p>
+    <p>Email: <%= @owner.user.email %></p>
+    <p>Address: <%= @owner.address %></p>
+    <p>Phone number: <%= @owner.phone_number %></p>
   </div>
 
   <hr>
@@ -55,6 +55,7 @@
 
   <hr>
 
-  <%= link_to "Add new animal", new_user_animal_path(@user) %>
+  <p><%= link_to "Add new animal", new_owner_attribute_animal_path(@owner) %></p>
+  <p><%= link_to "Update #{@owner.first_name} #{@owner.last_name}'s details", edit_owner_attribute_path(@owner) %></p>
 
 </div>

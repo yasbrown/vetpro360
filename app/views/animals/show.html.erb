@@ -3,7 +3,7 @@
     <div class="animal-info-header">
       <div class="d-flex justify-content-between align-items-center">
         <h1><%= @animal.name %></h1>
-        <%= link_to "Back to user profile", user_path(@user) %>
+        <%= link_to "Back to owner profile", owner_attribute_path(@owner) %>
       </div>
     </div>
 
@@ -38,7 +38,7 @@
     <div class="appointment-card border my-4">
       <p><%= appointment.start_time.strftime("%A %-d %B %Y") %></p>
       <p>Time: <%= appointment.start_time.strftime("%H:%M:%S") %></p>
-      <p>With: Dr <%= appointment.vet.name %></p>
+      <p>With: Dr <%= appointment.vet_attribute.name %></p>
       <p>Reason for appointment: <%= appointment.reason_for_appointment %></p>
     </div>
   <% end %>

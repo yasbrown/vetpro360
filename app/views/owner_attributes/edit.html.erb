@@ -1,0 +1,15 @@
+<h1>Edit details for <%= @owner.first_name %> <%= @owner.last_name %></h1>
+
+<%= form_with model: @owner do |f| %>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone_number %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to "Back",  owner_attribute_path(@owner) %>

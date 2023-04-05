@@ -1,0 +1,9 @@
+<h1>Add New Owner</h1>
+
+<%= simple_form_for [@owner] do |f| %>
+  <%= f.input :first_name, label: "First name", placeholder: "John" %>
+  <%= f.input :last_name, label: "Last name", placeholder: "Doe" %>
+  <%= f.input :phone_number, label: "Contact number" %>
+  <%= f.input :address, label: "Address" %>
+  <%= f.submit "Save", class: "btn btn-primary" %>
+<% end %>

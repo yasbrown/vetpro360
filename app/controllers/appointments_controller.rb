@@ -16,11 +16,10 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(appointment_params)
-
     @appointment.slot = @slot
 
-    vet = Vet.find(params[:appointment][:vet_id])
-    @appointment.vet = vet
+    vet = VetAttribute.find(params[:appointment][:vet_attribute_id])
+    @appointment.vet_attribute = vet
 
     animal = Animal.find(params[:appointment][:animal_id])
     @appointment.animal = animal
@@ -54,6 +53,6 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:reason_for_appointment, :animal_id, :vet_id, :slot_id)
+    params.require(:appointment).permit(:reason_for_appointment, :animal_id, :vet_attribute_id, :slot_id)
   end
 end

@@ -2,13 +2,14 @@ require "json"
 require "open-uri"
 
 class Animal < ApplicationRecord
-  belongs_to :user
+  belongs_to :owner_attribute
 
   has_many :medications, dependent: :destroy
   has_many :appointments, dependent: :destroy
   has_many :slots, through: :appointments
-  has_many :vets, through: :medications
-  has_many :weights
+  has_many :vet_attributes, through: :medications
+  has_many :vet_attributes, through: :appointments
+  has_many :weights, dependent: :destroy
 
   validates :name, presence: true
   validates :species, presence: true
