@@ -19,6 +19,8 @@ class OwnerAttributesController < ApplicationController
 
   def create
     new_user = User.create!
+    new_user.is_owner = true
+    new_user.save!
     @owner = OwnerAttribute.new(owner_params)
     @owner.user = new_user
     @owner.save!
@@ -30,7 +32,7 @@ class OwnerAttributesController < ApplicationController
 
   def update
     @owner.update(owner_params)
-    redirect_to  owner_attribute_path(@owner)
+    redirect_to owner_attribute_path(@owner)
   end
 
   private
