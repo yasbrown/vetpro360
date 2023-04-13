@@ -1,5 +1,6 @@
 class OwnerAttributesController < ApplicationController
   before_action :set_owner, only: [:edit, :update]
+  # before_action :set_user, only: [:create]
 
   def index
     @owners = OwnerAttribute.all
@@ -17,9 +18,9 @@ class OwnerAttributesController < ApplicationController
   end
 
   def create
+    new_user = User.create!
     @owner = OwnerAttribute.new(owner_params)
-    raise
-    @owner.user = @user
+    @owner.user = new_user
     @owner.save!
     redirect_to owner_attribute_path(@owner)
   end
@@ -40,5 +41,9 @@ class OwnerAttributesController < ApplicationController
 
   def set_owner
     @owner = OwnerAttribute.find(params[:id])
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
