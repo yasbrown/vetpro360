@@ -26,7 +26,11 @@ Rails.application.routes.draw do
     member do
       resources :weights, only: [:create]
       get "history", to: "animals#history"
-      post "history/create", to: "notes#create", as: :note_create
+      post "history/notes", to: "notes#create", as: :note_create
+      # get "history/notes/:note_id/edit", to: "notes#edit", as: :note_edit
+      # patch "history/notes/:note_id", to: "notes#update", as: :note_update
     end
   end
+
+  resources :notes, only: [:edit, :update]
 end

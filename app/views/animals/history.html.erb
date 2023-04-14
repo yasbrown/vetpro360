@@ -27,6 +27,9 @@
     <p><%= note.content %></p>
     <p><%= note.vet_attribute.name %></p>
   </div>
+  <div class="d-flex justify-content-end">
+    <%= link_to "Edit", edit_note_path(note) %>
+  </div>
   <% end %>
 
   <hr>
