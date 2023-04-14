@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_05_135819) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_14_125249) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_135819) do
     t.index ["vet_attribute_id"], name: "index_medications_on_vet_attribute_id"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.datetime "datetime_note_created"
+    t.text "content"
+    t.bigint "animal_id", null: false
+    t.bigint "vet_attribute_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["animal_id"], name: "index_notes_on_animal_id"
+    t.index ["vet_attribute_id"], name: "index_notes_on_vet_attribute_id"
+  end
+
   create_table "owner_attributes", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -83,7 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_135819) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.boolean "owner?"
+    t.boolean "is_owner", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -111,6 +122,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_135819) do
   add_foreign_key "appointments", "vet_attributes"
   add_foreign_key "medications", "animals"
   add_foreign_key "medications", "vet_attributes"
+  add_foreign_key "notes", "animals"
+  add_foreign_key "notes", "vet_attributes"
   add_foreign_key "vet_attributes", "users"
   add_foreign_key "weights", "animals"
 end

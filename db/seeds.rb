@@ -19,14 +19,13 @@ puts "Building new users"
 user1 = User.create!(
   email: "test1@test.com",
   password: "password",
-  owner?: true
+  is_owner: true
 )
 puts "User with id: #{user1.id} has been created"
 
 user2 = User.create!(
   email: "test2@test.com",
   password: "password",
-  owner?: true
 )
 puts "User with id: #{user2.id} has been created"
 
@@ -34,6 +33,7 @@ owner = OwnerAttribute.create!(
   first_name: "Jane",
   last_name: "Doe",
   address: "4 Hoyte Drive, London",
+  phone_number: "0779876002",
   user: user1
 )
 puts "Owner with id: #{owner.id} has been created"
@@ -81,13 +81,13 @@ counter = 0
 ailment = ["Sore leg", "Skin", "Ears", "Diarrhoea", "Not right", "Vaccines"]
 pets = [pet1, pet2, pet3]
 
-schedule = IceCube::Schedule.new(Time.local(2023, 4, 6, 9)) do |s|
+schedule = IceCube::Schedule.new(Time.local(2023, 4, 14, 9)) do |s|
   s.add_recurrence_rule(IceCube::Rule.minutely(15).count(37))
 end
 
 schedule.all_occurrences[0..-2].each do |starting_time_slots|
   slot = Slot.create!(
-    date: Date.new(2023, 4, 6),
+    date: Date.new(2023, 4, 14),
     available: boolean_array.sample,
     start_time: starting_time_slots,
     end_time: schedule.all_occurrences[counter += 1]

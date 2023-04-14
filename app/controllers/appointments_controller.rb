@@ -8,6 +8,7 @@ class AppointmentsController < ApplicationController
   end
 
   def show
+    @current_meds = Medication.where(animal_id: @appointment.animal_id)
   end
 
   def new

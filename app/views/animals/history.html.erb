@@ -1,0 +1,38 @@
+<div class="container pt-4">
+  <p>Name: <%= @animal.name %></p>
+  <p>Species: <%= @animal.species %></p>
+  <p>Breed: <%= @animal.breed %></p>
+  <p>Gender: <%= @animal.gender %></p>
+  <p>Current medications:
+    <% @current_meds.each do |meds| %>
+      <%= meds %>
+    <% end %>
+  </p>
+
+  <hr>
+  <h3>Add new note here:</h3>
+  <%= simple_form_for [@animal, @new_note], url: note_create_animal_path(@animal) do |f| %>
+    <div class="d-flex">
+      <%= f.input :content, placeholder: "Write clinical note here", label: false %>
+      <%= f.hidden_field :datetime_note_created, value: Date.today %>
+      <%= f.button :submit, "Save note" %>
+    </div>
+  <% end %>
+
+  <hr>
+
+  <h3>All notes:</h3>
+  <% @all_notes.each do |note| %>
+  <div class="d-flex justify-content-between">
+    <p><%= note.content %></p>
+    <p><%= note.vet_attribute.name %></p>
+  </div>
+  <div class="d-flex justify-content-end">
+    <%= link_to "Edit", edit_note_path(note) %>
+  </div>
+  <% end %>
+
+  <hr>
+  <%= link_to "Back to homepage", root_path %>
+
+</div>

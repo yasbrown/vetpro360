@@ -9,4 +9,7 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: { message: "Email already exists"}
   # validates :password, length: { minimum: 8 }
+
+  has_many :vet_attributes, dependent: :destroy
+  has_many :owner_attributes, dependent: :destroy
 end
