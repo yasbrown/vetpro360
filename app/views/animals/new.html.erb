@@ -1,9 +1,17 @@
-<h1>Add New Animal</h1>
+<div class="container">
+  <div class="new-animal-header my-4 mb-5">
+    <h1>New Animal Details</h1>
+  </div>
 
-<%= simple_form_for [@owner, @animal] do |f| %>
-  <%= f.input :name, label: "Animal name", placeholder: "Max" %>
-  <%= f.input :species, collection: Animal::SPECIES %>
-  <%= f.input :breed, collection: Animal::DOG_BREEDS %>
-  <%= f.input :gender, collection: Animal::GENDER, label: "Gender" %>
-  <%= f.submit "Save animal", class: "btn btn-primary" %>
-<% end %>
+  <%= simple_form_for [@owner, @animal] do |f| %>
+    <%= f.input :name, label: "Animal name", placeholder: "Max" %>
+    <%= f.input :species, collection: Animal::SPECIES %>
+    <%= f.input :breed, collection: Animal::DOG_BREEDS %>
+    <%= f.input :gender, collection: Animal::GENDER, label: "Gender" %>
+    <%= f.submit "Save animal", class: "btn-flat" %>
+  <% end %>
+
+  <hr>
+
+  <%= link_to "Back", owner_attribute_path(@owner) %>
+</div>
