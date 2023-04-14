@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+  devise_scope :user do
+    get "users/sign_out" => "devise/sessions#destroy"
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -22,7 +25,8 @@ Rails.application.routes.draw do
     get "unarchive_animal", to: "animals#unarchive_animal", as: :unarchive
     member do
       resources :weights, only: [:create]
+      get "history", to: "animals#history"
+      post "history/create", to: "notes#create", as: :note_create
     end
   end
-
 end

@@ -4,5 +4,6 @@ class VetAttribute < ApplicationRecord
   has_many :appointments, dependent: :destroy
   has_many :animals, through: :medications
   has_many :animals, through: :appointments
+  has_many :notes, dependent: :destroy
   validates :name, presence: true
 end

@@ -1,6 +1,6 @@
 class AnimalsController < ApplicationController
   before_action :set_owner, only: [:new, :create]
-  before_action :set_animal, only: [:destroy, :show, :edit, :update]
+  before_action :set_animal, only: [:destroy, :show, :edit, :update, :history]
 
   def new
     @animal = Animal.new
@@ -44,6 +44,12 @@ class AnimalsController < ApplicationController
   def update
     @animal.update(animal_params)
     redirect_to animal_path(@animal)
+  end
+
+  def history
+    @current_meds = Medication.where(animal_id: params[:id])
+    @new_note = Note.new
+    @all_notes = Note.where(animal_id: params[:id])
   end
 
 
