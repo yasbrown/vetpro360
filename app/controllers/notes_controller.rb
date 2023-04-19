@@ -6,6 +6,7 @@ class NotesController < ApplicationController
     @new_note = Note.new(notes_params)
     @new_note.animal = @animal
     @new_note.vet_attribute = VetAttribute.find_by(user_id: current_user.id)
+    @new_note.datetime_note_created = Time.now
     @new_note.save!
     redirect_to history_animal_path(@animal)
   end
