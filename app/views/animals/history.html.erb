@@ -10,7 +10,7 @@
   </p>
 
   <hr>
-  <h3>Add new note here:</h3>
+  <h3>Add new note:</h3>
   <%= simple_form_for [@animal, @new_note], url: note_create_animal_path(@animal) do |f| %>
     <div class="d-flex">
       <%= f.input :content, placeholder: "Write clinical note here", label: false %>
@@ -18,6 +18,8 @@
       <%= f.button :submit, "Save note" %>
     </div>
   <% end %>
+
+  <h3>Add new medication:</h3>
 
   <hr>
 
