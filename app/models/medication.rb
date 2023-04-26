@@ -2,14 +2,14 @@ require "json"
 require "open-uri"
 require "csv"
 
-# class Medication < ApplicationRecord
-  # belongs_to :animal
-  # belongs_to :vet_attribute
-  # validates :quantity_dispensed, presence: true,
-  #                                 numericality: { only_integer: true }
-  # validates :start_date, presence: true
-  # validates :end_date, presence: true
-  # validates :quantity_dispensed, numericality: { only_integer: true }
+class Medication < ApplicationRecord
+  belongs_to :animal
+  belongs_to :vet_attribute
+  validates :quantity_dispensed, presence: true,
+                                  numericality: { only_integer: true }
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates :quantity_dispensed, numericality: { only_integer: true }
 
   medication_list = []
   csv_filepath = "db/medication_list.csv"
@@ -31,4 +31,10 @@ require "csv"
       csv << [meds]
     end
   end
-# end
+
+  CSV.foreach(csv_filepath, headers: :first_row) do |row|
+    medication_list << row['Medication Name']
+  end
+
+  MEDICATIONS = medication_list
+end
