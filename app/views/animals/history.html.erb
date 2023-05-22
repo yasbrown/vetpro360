@@ -20,6 +20,10 @@
   <% end %>
 
   <h3>Add new medication:</h3>
+  <%= simple_form_for [@animal, @medication], url: medications_path(@animal) do |f| %>
+  <%= f.input :name, collection: Medication::MEDICATION_LIST %>
+  <%= f.button :submit, "Save medication" %>
+  <% end %>
 
   <hr>
 
@@ -29,12 +33,7 @@
     <p><%= note.content %></p>
     <div>
       <p><%= note.vet_attribute.name %></p>
-      <% if note.datetime_note_created < Date.new(2023, 10, 29) %>
-        <% time = note.datetime_note_created + 60*60 %>
-        <p><%= time.strftime("%d %b %Y") %> @ <%= time.strftime("%H") %>:<%= time.strftime("%M") %></p>
-      <% else %>
-        <p><%= note.datetime_note_created.strftime("%d %b %Y") %> @ <%= note.datetime_note_created.strftime("%H") %>:<%= note.datetime_note_created.strftime("%M") %></p>
-      <% end %>
+      <p><%= note.datetime_note_created.in_time_zone("London").strftime("%d %b %Y %H:%M") %></p>
     </div>
   </div>
   <div class="d-flex justify-content-end">
