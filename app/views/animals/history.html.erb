@@ -10,34 +10,48 @@
   </p>
 
   <hr>
-  <h3>Add new note:</h3>
-  <%= simple_form_for [@animal, @new_note], url: note_create_animal_path(@animal) do |f| %>
-    <div class="d-flex">
-      <%= f.input :content, placeholder: "Write clinical note here", label: false %>
-      <%= f.hidden_field :datetime_note_created, value: Date.today %>
-      <%= f.button :submit, "Save note" %>
+
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Notes</button>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">History</button>
     </div>
-  <% end %>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+      <div>
+        <h3>Add new note:</h3>
+        <%= simple_form_for [@animal, @new_note], url: note_create_animal_path(@animal) do |f| %>
+          <div class="d-flex">
+            <%= f.input :content, placeholder: "Write clinical note here", label: false %>
+            <%= f.hidden_field :datetime_note_created, value: Date.today %>
+            <%= f.button :submit, "Save note" %>
+          </div>
+        <% end %>
 
-  <h3>Add new medication:</h3>
-  <%= simple_form_for [@animal, @medication], url: medications_path(@animal) do |f| %>
-  <%= f.input :name, collection: Medication::MEDICATION_LIST %>
-  <%= f.button :submit, "Save medication" %>
-  <% end %>
-
-  <hr>
-
-  <h3>All notes:</h3>
-  <% @all_notes.each do |note| %>
-  <div class="d-flex justify-content-between">
-    <p><%= note.content %></p>
-    <div>
-      <p><%= note.vet_attribute.name %></p>
-      <p><%= note.datetime_note_created.in_time_zone("London").strftime("%d %b %Y %H:%M") %></p>
+        <h3>Add new medication:</h3>
+        <%= simple_form_for [@animal, @medication], url: medications_path(@animal) do |f| %>
+        <%= f.input :name, collection: Medication::MEDICATION_LIST %>
+        <%= f.button :submit, "Save medication" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+      <div>
+        <h3>All notes:</h3>
+        <% @all_notes.each do |note| %>
+        <div class="d-flex justify-content-between">
+          <p><%= note.content %></p>
+          <div>
+            <p><%= note.vet_attribute.name %></p>
+            <p><%= note.datetime_note_created.in_time_zone("London").strftime("%d %b %Y %H:%M") %></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <%= link_to "Edit", edit_note_path(note) %>
+        </div>
+        <% end %>
+      </div>
     </div>
   </div>
-  <div class="d-flex justify-content-end">
-    <%= link_to "Edit", edit_note_path(note) %>
-  </div>
-  <% end %>
 </div>
