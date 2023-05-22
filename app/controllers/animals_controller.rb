@@ -50,6 +50,7 @@ class AnimalsController < ApplicationController
     @current_meds = Medication.where(animal_id: params[:id])
     @new_note = Note.new
     @all_notes = Note.where(animal_id: params[:id])
+    @medication = Medication.new
   end
 
 
