@@ -1,20 +1,40 @@
 <div class="container pt-4">
   <div class="history-animal-details">
-    <div class="d-flex justify-content-between">
-      <p>Name: <%= @animal.name %></p>
-      <p>Species: <%= @animal.species %></p>
-      <p>Breed: <%= @animal.breed %></p>
+    <div class="history-animal-details-info">
+      <div class="row">
+        <div class="col d-flex align-items-center">
+          <h6>Name:</h6> <p>
+          <%= @animal.name %></p>
+        </div>
+        <div class="col d-flex align-items-center">
+          <h6>Species:</h6>
+          <p><%= @animal.species %></p>
+        </div>
+        <div class="col d-flex align-items-center">
+          <h6>Breed:</h6>
+          <p><%= @animal.breed %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex align-items-center">
+          <h6>Age: </h6>
+        </div>
+        <div class="col d-flex align-items-center">
+          <h6>Weight:</h6>
+          <p><%= @animal.current_weight %>kg</p>
+        </div>
+        <div class="col d-flex align-items-center">
+          <h6>Gender:</h6>
+          <p><%= @animal.gender %></p>
+        </div>
+      </div>
     </div>
-    <div class="d-flex justify-content-between">
-      <p>Age: </p>
-      <p>Weight: <%= @animal.current_weight %>kg</p>
-      <p>Gender: <%= @animal.gender %></p>
+    <div class="history-animal-details-current-medications pt-3">
+      <h6>Current medications:</h6>
+        <% @current_meds.each do |meds| %>
+          <p><%= meds.name %> : <strong><%= (meds.end_date - Date.today).to_i %> days left</strong></p>
+        <% end %>
     </div>
-    <p>Current medications:
-      <% @current_meds.each do |meds| %>
-        <p><%= meds.name %> : <strong><%= (meds.end_date - Date.today).to_i %> days left</strong></p>
-      <% end %>
-    </p>
   </div>
 
   <hr>
@@ -59,18 +79,28 @@
         <% @all_notes.each do |note| %>
         <div class="my-4">
           <div class="d-flex justify-content-between">
-            <strong><p><%= note.datetime_note_created.in_time_zone("London").strftime("%d %b %Y, %H:%M") %></p></strong>
-            <p><%= note.vet_attribute.name %></p>
+            <strong><h5><%= note.datetime_note_created.in_time_zone("London").strftime("%d %b %Y, %H:%M") %></h5></strong>
+            <h5><%= note.vet_attribute.name %></h5>
           </div>
-          <p><%= note.content %></p>
-          <%= link_to "Edit", edit_note_path(note) %>
+          <div class="d-flex justify-content-between">
+            <p><%= note.content %></p>
+            <%= link_to "Edit", edit_note_path(note) %>
+          </div>
+          <h5>Medication:</h5>
           <% @all_medications.each do |medication| %>
-            <div class="d-flex justify-content-between">
-              <p><%= medication.name %></p>
-              <p><%= (medication.end_date - medication.start_date).to_i %> days</p>
-            </div>
+            <ul>
+              <% if medication.created_at.to_date == note.created_at.to_date %>
+                <li><p><%= medication.name %></p></li>
+                <p>Number of days: <%= (medication.end_date - medication.start_date).to_i %></p>
+                <% if medication.quantity_dispensed && medication.frequency_to_give_per_day != nil %>
+                  <p>Quantity: <%= medication.quantity_dispensed %></p>
+                  <p>Amount to give per day: <%= medication.frequency_to_give_per_day %></p>
+                <% end %>
+              <% end %>
+            </ul>
           <% end %>
         </div>
+        <hr>
         <% end %>
       </div>
     </div>

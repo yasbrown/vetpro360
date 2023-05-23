@@ -53,6 +53,8 @@ class AnimalsController < ApplicationController
     @all_medications = Medication.where(animal_id: params[:id])
     @medication = Medication.new
     @new_weight = Weight.new
+
+    @meds = Medication.where(created_at: Date.today)
   end
 
 
