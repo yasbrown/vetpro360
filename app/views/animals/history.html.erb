@@ -32,7 +32,9 @@
     <div class="history-animal-details-current-medications pt-3">
       <h6>Current medications:</h6>
         <% @current_meds.each do |meds| %>
-          <p><%= meds.name %> : <strong><%= (meds.end_date - Date.today).to_i %> days left</strong></p>
+          <ul>
+            <li><p><%= meds.name %> : <strong><%= (meds.end_date - Date.today).to_i %> days left</strong></p></li>
+          </ul>
         <% end %>
     </div>
   </div>
@@ -86,18 +88,20 @@
             <p><%= note.content %></p>
             <%= link_to "Edit", edit_note_path(note) %>
           </div>
-          <h5>Medication:</h5>
-          <% @all_medications.each do |medication| %>
-            <ul>
-              <% if medication.created_at.to_date == note.created_at.to_date %>
-                <li><p><%= medication.name %></p></li>
-                <p>Number of days: <%= (medication.end_date - medication.start_date).to_i %></p>
-                <% if medication.quantity_dispensed && medication.frequency_to_give_per_day != nil %>
-                  <p>Quantity: <%= medication.quantity_dispensed %></p>
-                  <p>Amount to give per day: <%= medication.frequency_to_give_per_day %></p>
+          <% if !@all_medications.empty? %>
+            <h5>Medication:</h5>
+            <% @all_medications.each do |medication| %>
+              <ul>
+                <% if medication.created_at.to_date == note.created_at.to_date %>
+                  <li><p><%= medication.name %></p></li>
+                  <p>Number of days: <%= (medication.end_date - medication.start_date).to_i %></p>
+                  <% if medication.quantity_dispensed && medication.frequency_to_give_per_day != nil %>
+                    <p>Quantity: <%= medication.quantity_dispensed %></p>
+                    <p>Amount to give per day: <%= medication.frequency_to_give_per_day %></p>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </ul>
+              </ul>
+            <% end %>
           <% end %>
         </div>
         <hr>

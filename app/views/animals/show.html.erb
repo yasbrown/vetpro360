@@ -45,6 +45,25 @@
 
   <hr>
 
+  <h3><%= @animal.name %>'s Medication:</h3>
+  <% if @medications.empty? %>
+    <p><%= @animal.name %> doesn't have any medications at the moment!</p>
+  <% else %>
+    <% @medications.each do |medication| %>
+      <ul>
+        <li><p><%= medication.name %></p></li>
+        <p><%= (medication.end_date - medication.start_date).to_i %> days left</p>
+        <% if medication.frequency_to_give_per_day == nil %>
+          <p>Give as instructed by your vet</p>
+        <% else %>
+          <p>Give <%= medication.frequency_to_give_per_day %> times a day</p>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+
+  <hr>
+
   <p>Change details for <%= @animal.name %> <%= link_to "here", edit_animal_path(@animal) %></p>
 
   <hr>

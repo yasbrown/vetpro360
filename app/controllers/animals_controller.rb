@@ -36,6 +36,7 @@ class AnimalsController < ApplicationController
     @owner = @animal.owner_attribute
     @appointments = Appointment.where(animal_id: Animal.find(params[:id]))
     @new_weight = Weight.new
+    @medications = Medication.where(animal_id: Animal.find(params[:id]))
   end
 
   def edit
@@ -49,12 +50,10 @@ class AnimalsController < ApplicationController
   def history
     @current_meds = Medication.where(animal_id: params[:id])
     @new_note = Note.new
-    @all_notes = Note.where(animal_id: params[:id])
+    @all_notes = Note.where(animal_id: params[:id]).sort_by {|note| note.created_at}.reverse
     @all_medications = Medication.where(animal_id: params[:id])
     @medication = Medication.new
     @new_weight = Weight.new
-
-    @meds = Medication.where(created_at: Date.today)
   end
 
 
