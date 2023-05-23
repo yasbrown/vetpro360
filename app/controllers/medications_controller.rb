@@ -5,6 +5,7 @@ class MedicationsController < ApplicationController
   def create
     @medication = Medication.new(medication_params)
     @medication.vet_attribute = @vet
+    @medication.animal = @animal
     @medication.save!
     redirect_to history_animal_path(@animal)
   end
@@ -12,11 +13,11 @@ class MedicationsController < ApplicationController
   private
 
   def medication_params
-    params.require(:medication).permit(:name, :start_date, :end_date)
+    params.require(:medication).permit(:name, :start_date, :end_date, :quantity_dispensed, :frequency_to_give_per_day)
   end
 
   def set_vet
-    @vet = VetAttribute.find(params[:vet_attribute_id])
+    @vet = VetAttribute.find_by(user_id: current_user.id)
   end
 
   def set_animal
