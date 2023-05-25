@@ -6,10 +6,17 @@
         <%= link_to "Back to owner profile", owner_attribute_path(@owner) %>
       </div>
     </div>
-
-    <p>Species: <%= @animal.species %></p>
-    <p>Breed: <%= @animal.breed %></p>
-    <p>Gender: <%= @animal.gender %></p>
+    <div class="row">
+      <div class="col">
+        <p>Species: <%= @animal.species %></p>
+      </div>
+      <div class="col">
+        <p>Breed: <%= @animal.breed %></p>
+      </div>
+      <div class="col">
+        <p>Gender: <%= @animal.gender %></p>
+      </div>
+    </div>
     <div class="animal-weight-info d-flex justify-content-between align-items-center">
       <p>Weight: <%= @animal.current_weight %>kg</p>
       <div class="animal-weight-form d-flex align-items-center">

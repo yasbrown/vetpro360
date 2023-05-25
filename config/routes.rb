@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :medications, only: [:destroy]
+  delete "medications/:id", to: "medications#destroy", as: :destroy_medication
+  # resources :medications, only: [:destroy]
   resources :notes, only: [:edit, :update]
 end

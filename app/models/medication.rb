@@ -39,4 +39,12 @@ class Medication < ApplicationRecord
   end
 
   MEDICATION_LIST = medication_list
+
+  def dispensed_today?
+    created_at.to_date == Date.today
+  end
+
+  def medication_course_completed?
+    (end_date.to_date - Date.today).to_i <= 0
+  end
 end

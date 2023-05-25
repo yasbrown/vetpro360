@@ -48,7 +48,12 @@ class AnimalsController < ApplicationController
   end
 
   def history
-    @current_meds = Medication.where(animal_id: params[:id])
+    @active_medications_array = []
+    current_meds = Medication.where(animal_id: params[:id])
+    current_meds.each do |current_med|
+      @active_medications_array << current_med if !current_med.medication_course_completed?
+    end
+
     @new_note = Note.new
     @all_notes = Note.where(animal_id: params[:id]).sort_by {|note| note.created_at}.reverse
     @all_medications = Medication.where(animal_id: params[:id])
