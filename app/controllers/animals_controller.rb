@@ -36,7 +36,14 @@ class AnimalsController < ApplicationController
     @owner = @animal.owner_attribute
     @appointments = Appointment.where(animal_id: Animal.find(params[:id]))
     @new_weight = Weight.new
-    @medications = Medication.where(animal_id: Animal.find(params[:id]))
+
+    @active_medications_array = []
+    medications = Medication.where(animal_id: Animal.find(params[:id]))
+    medications.each do |current_medication|
+      @active_medications_array << current_medication if !current_medication.medication_course_completed?
+    end
+
+    @all_medications = Medication.where(animal_id: Animal.find(params[:id])).sort_by {|medication| medication.created_at}
   end
 
   def edit

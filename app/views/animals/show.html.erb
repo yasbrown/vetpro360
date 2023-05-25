@@ -52,14 +52,15 @@
 
   <hr>
 
-  <h3><%= @animal.name %>'s Medication:</h3>
-  <% if @medications.empty? %>
+  <h3><%= @animal.name %>'s Current Medication:</h3>
+  <% if @active_medications_array.empty? %>
     <p><%= @animal.name %> doesn't have any medications at the moment!</p>
   <% else %>
-    <% @medications.each do |medication| %>
+    <% @active_medications_array.each do |medication| %>
       <ul>
         <li><p><%= medication.name %></p></li>
         <p><%= (medication.end_date - medication.start_date).to_i %> days left</p>
+        <p>Dispensed: <%= medication.start_date.strftime("%d %b %Y") %>, Until: <%= medication.end_date.strftime("%d %b %Y")%></p>
         <% if medication.frequency_to_give_per_day == nil %>
           <p>Give as instructed by your vet</p>
         <% else %>
@@ -68,6 +69,23 @@
       </ul>
     <% end %>
   <% end %>
+  <a class="btn btn-flat" data-bs-toggle="collapse" href="#collapseMedications" role="button" aria-expanded="false" aria-controls="collapseMedications">
+    See all medications
+  </a>
+  <div class="collapse" id="collapseMedications">
+    <% @all_medications.each do |medication| %>
+      <ul>
+        <li><p>Dispensed: <%= medication.start_date.strftime("%d %b %Y") %></p></li>
+        <p><%= medication.name %></p>
+        <p>Until: <%= medication.end_date.strftime("%d %b %Y") %>, (<%= (medication.end_date - medication.start_date).to_i %> days)</p>
+        <% if medication.frequency_to_give_per_day == nil %>
+          <p>Instructions: Give as instructed by your vet</p>
+        <% else %>
+          <p>Instructions: Give <%= medication.frequency_to_give_per_day %> times a day</p>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 
   <hr>
 
