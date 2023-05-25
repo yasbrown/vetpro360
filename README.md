@@ -1,5 +1,5 @@
 <div id="top">
-  Having used many practice management softwares in my time as a Veterinary Surgeon, all of them are janky and horrible to use in one way or another. I thought I'd try my hand at building my perfect practice management software, with an intuitive user-flow and easy to find buttons..so she says..
+  Having used many practice management softwares in my time as a Veterinary Surgeon, all of them are janky and horrible to use in their own special ways.. I thought I'd try my hand at building my perfect practice management software, with an intuitive user-flow and easy to find buttons..so she says..
   
   <br>
   <br>
