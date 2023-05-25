@@ -10,6 +10,13 @@ class MedicationsController < ApplicationController
     redirect_to history_animal_path(@animal)
   end
 
+  def destroy
+    @medication = Medication.find(params[:id])
+    @medication.destroy!
+    @animal = Animal.find(params[:id]) #tried to use before action but destroy method stops working??
+    redirect_to history_animal_path(@animal), status: :see_other
+  end
+
   private
 
   def medication_params
